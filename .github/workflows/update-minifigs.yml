@@ -1,0 +1,16 @@
+name: Update minifigs.json
+
+on:
+  schedule:
+    # 定期実行のスケジュール（例: 毎日午前3時 UTC）
+    - cron: '0 3 * * *'
+  workflow_dispatch: # 手動実行も可能にする
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # ここにminifigs.jsonを更新する処理を追加
