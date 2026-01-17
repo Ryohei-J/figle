@@ -1,3 +1,4 @@
+import Image from "next/image";
 import JsonViewer from "./components/JsonViewer";
 
 export default function Home() {
@@ -5,9 +6,18 @@ export default function Home() {
     <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-black dark:text-zinc-50 mb-2">
-            figle
-          </h1>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="figle logo"
+              width={40}
+              height={40}
+              className="object-contain"
+            />
+            <h1 className="text-4xl font-bold text-black dark:text-zinc-50 mb-2">
+              figle
+            </h1>
+          </div>
         </div>
         <JsonViewer />
       </main>
