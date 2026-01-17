@@ -3,7 +3,7 @@ name: Update minifigs.json
 on:
   schedule:
     # 定期実行のスケジュール（例: 毎日午前3時 UTC）
-    - cron: '0 3 * * *'
+    - cron: '0 18 * * *'
   workflow_dispatch: # 手動実行も可能にする
 
 jobs:
