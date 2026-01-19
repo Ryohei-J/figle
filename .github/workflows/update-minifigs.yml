@@ -2,9 +2,9 @@ name: Update minifigs.json
 
 on:
   schedule:
-    # 定期実行のスケジュール（例: 毎日午前3時 UTC）
+    # 実行スケジュール
     - cron: '0 18 * * *'
-  workflow_dispatch: # 手動実行も可能にする
+  workflow_dispatch: # 手動実行も可能
 
 jobs:
   update:
@@ -12,5 +12,29 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      # ここにminifigs.jsonを更新する処理を追加
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Download CSVs
+        run: |
+          curl -L -o themes.csv.gz https://cdn.rebrickable.com/media/downloads/themes.csv.gz
+          curl -L -o sets.csv.gz https://cdn.rebrickable.com/media/downloads/sets.csv.gz
+          curl -L -o inventories.csv.gz https://cdn.rebrickable.com/media/downloads/inventories.csv.gz
+          curl -L -o inventory_minifigs.csv.gz https://cdn.rebrickable.com/media/downloads/inventory_minifigs.csv.gz
+          curl -L -o minifigs.csv.gz https://cdn.rebrickable.com/media/downloads/minifigs.csv.gz
+
+      - name: Run Go Processor
+        run: |
+          cd scripts
+          go run main.go
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add minifigs.json
+          # 変更がある場合のみコミット
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update minifig data $(date +%Y-%m-%d)" && git push)
