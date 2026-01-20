@@ -8,7 +8,7 @@ export default function Home() {
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <a href="/" className="flex items-center gap-3 cursor-default">
               <Image
                 src="/logo.png"
                 alt="figle logo"
@@ -19,7 +19,7 @@ export default function Home() {
               <h1 className="text-4xl font-bold text-black dark:text-zinc-50 mb-2">
                 figle
               </h1>
-            </div>
+            </a>
             <AuthButton />
           </div>
         </div>
